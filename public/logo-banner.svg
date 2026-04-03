@@ -1,0 +1,7 @@
+<svg width="154" height="32" viewBox="0 0 154 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 4C5.79086 4 4 5.79086 4 8V19H28V8C28 5.79086 26.2091 4 24 4H8Z" fill="#465FFF"/>
+  <rect x="6" y="6" width="20" height="11" rx="1" fill="white"/>
+  <path d="M1 20C1 19.4477 1.44772 19 2 19H30C30.5523 19 31 19.4477 31 20V21C31 22.6569 29.6569 24 28 24H4C2.34315 24 1 22.6569 1 21V20Z" fill="#465FFF"/>
+  <path d="M13 20H19V21.5C19 22.3284 18.3284 23 17.5 23H14.5C13.6716 23 13 22.3284 13 21.5V20Z" fill="#3249DF"/>
+  <text x="36" y="24" fill="#465FFF" font-size="22" font-weight="700" font-family="Outfit, Inter, Arial, sans-serif">Laptopku</text>
+</svg>
