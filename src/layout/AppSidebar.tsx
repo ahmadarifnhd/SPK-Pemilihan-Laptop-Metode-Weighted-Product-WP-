@@ -14,6 +14,7 @@ import {
   TableIcon,
   UserCircleIcon,
 } from "../icons/index";
+import { logoutAction } from "@/app/actions/auth";
 
 type NavItem = {
   name: string;
@@ -74,43 +75,10 @@ const navItems: NavItem[] = [
   // },
 ];
 const othersItems: NavItem[] = [
-  // {
-  //   icon: <PieChartIcon />,
-  //   name: "Charts",
-  //   subItems: [
-  //     { name: "Line Chart", path: "/line-chart", pro: false },
-  //     { name: "Bar Chart", path: "/bar-chart", pro: false },
-  //   ],
-  // },
-  // {
-  //   icon: <BoxCubeIcon />,
-  //   name: "UI Elements",
-  //   subItems: [
-  //     { name: "Alerts", path: "/alerts", pro: false },
-  //     { name: "Avatar", path: "/avatars", pro: false },
-  //     { name: "Badge", path: "/badge", pro: false },
-  //     { name: "Buttons", path: "/buttons", pro: false },
-  //     { name: "Images", path: "/images", pro: false },
-  //     { name: "Videos", path: "/videos", pro: false },
-  //   ],
-  // },
-  // {
-  //   icon: <PlugInIcon />,
-  //   name: "Authentication",
-  //   subItems: [
-  //     { name: "Sign In", path: "/signin", pro: false },
-  //     { name: "Sign Up", path: "/signup", pro: false },
-  //   ],
-  // },
   {
     icon: <UserCircleIcon />,
     name: "Profile",
     path: "/profile",
-  },
-  {
-    icon: <ArrowRightIcon />,
-    name: "Sign Out",
-    path: "/signin",
   },
 ];
 
@@ -369,6 +337,22 @@ const AppSidebar: React.FC = () => {
                 )}
               </h2>
               {renderMenuItems(othersItems, "others")}
+              {/* Sign Out Button */}
+              <form action={logoutAction}>
+                <button
+                  type="submit"
+                  className={`menu-item group menu-item-inactive mt-2 w-full ${
+                    !isExpanded && !isHovered ? "lg:justify-center" : "lg:justify-start"
+                  }`}
+                >
+                  <span className="menu-item-icon-inactive">
+                    <ArrowRightIcon />
+                  </span>
+                  {(isExpanded || isHovered || isMobileOpen) && (
+                    <span className="menu-item-text">Sign Out</span>
+                  )}
+                </button>
+              </form>
             </div>
           </div>
         </nav>

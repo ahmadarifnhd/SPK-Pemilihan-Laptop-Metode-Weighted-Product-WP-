@@ -12,6 +12,10 @@ export default function MessagesPage() {
       .then(data => {
         setMessages(Array.isArray(data) ? data : []);
         setLoading(false);
+      })
+      .catch(err => {
+        console.error('Gagal memuat pesan:', err);
+        setLoading(false);
       });
   }, []);
 

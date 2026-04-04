@@ -17,30 +17,35 @@ export default function AlternatifPage() {
   }, []);
 
   const fetchData = async () => {
-    const [resAlt, resKrit] = await Promise.all([
-      fetch('/api/alternatif'),
-      fetch('/api/kriteria'),
-    ]);
-    const dataAlt = await resAlt.json();
-    const dataKrit = await resKrit.json();
+    try {
+      const [resAlt, resKrit] = await Promise.all([
+        fetch('/api/alternatif'),
+        fetch('/api/kriteria'),
+      ]);
+      const dataAlt = await resAlt.json();
+      const dataKrit = await resKrit.json();
 
-    const nextAlternatif = Array.isArray(dataAlt) ? dataAlt : [];
-    const nextKriteria = Array.isArray(dataKrit) ? dataKrit : [];
+      const nextAlternatif = Array.isArray(dataAlt) ? dataAlt : [];
+      const nextKriteria = Array.isArray(dataKrit) ? dataKrit : [];
 
-    setAlternatif(nextAlternatif);
-    setKriteria(nextKriteria);
+      setAlternatif(nextAlternatif);
+      setKriteria(nextKriteria);
 
-    // Keep form keys in sync with criteria so new criteria (C7, C8, ...) appear automatically.
-    setFormData((prev: any) => {
-      const next = { ...prev };
-      for (const k of nextKriteria) {
-        if (next[k.kode] === undefined) {
-          next[k.kode] = '';
+      // Keep form keys in sync with criteria so new criteria (C7, C8, ...) appear automatically.
+      setFormData((prev: any) => {
+        const next = { ...prev };
+        for (const k of nextKriteria) {
+          if (next[k.kode] === undefined) {
+            next[k.kode] = '';
+          }
         }
-      }
-      return next;
-    });
-    setLoading(false);
+        return next;
+      });
+    } catch (err) {
+      console.error('Gagal memuat data alternatif:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getCriterionValue = (item: any, kode: string): any => {

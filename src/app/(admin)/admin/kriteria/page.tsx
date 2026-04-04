@@ -13,10 +13,15 @@ export default function KriteriaPage() {
   }, []);
 
   const fetchKriteria = async () => {
-    const res = await fetch('/api/kriteria');
-    const data = await res.json();
-    setKriteria(Array.isArray(data) ? data : []);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/kriteria');
+      const data = await res.json();
+      setKriteria(Array.isArray(data) ? data : []);
+    } catch (err) {
+      console.error('Gagal memuat kriteria:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleOpenModal = (k: any = null) => {

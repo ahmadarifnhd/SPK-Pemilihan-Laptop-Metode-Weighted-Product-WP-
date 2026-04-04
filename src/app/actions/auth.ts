@@ -2,6 +2,7 @@
 
 import { getSupabaseAdminClient } from "@/lib/databaseServer";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function loginAction(formData: FormData) {
   const email = formData.get("email") as string;
@@ -42,8 +43,14 @@ export async function loginAction(formData: FormData) {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
-    maxAge: keepLoggedIn ? 60 * 60 * 24 * 30 : undefined, // 30 days if keepLoggedIn
+    maxAge: keepLoggedIn ? 60 * 60 * 24 * 30 : 60 * 60 * 8, // 30 hari jika keepLoggedIn, 8 jam default
   });
 
   return { success: true, redirect: "/admin/dashboard" };
+}
+
+export async function logoutAction() {
+  const cookieStore = await cookies();
+  cookieStore.delete("auth_session");
+  redirect("/signin");
 }

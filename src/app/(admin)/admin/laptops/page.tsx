@@ -37,15 +37,20 @@ export default function LaptopsPage() {
   }, []);
 
   const fetchData = async () => {
-    const [resLaptops, resKrit] = await Promise.all([
-      fetch('/api/laptops'),
-      fetch('/api/kriteria'),
-    ]);
-    const dLaptops = await resLaptops.json();
-    const dKrit = await resKrit.json();
-    setLaptops(Array.isArray(dLaptops) ? dLaptops : []);
-    setKriteria(Array.isArray(dKrit) ? dKrit : []);
-    setLoading(false);
+    try {
+      const [resLaptops, resKrit] = await Promise.all([
+        fetch('/api/laptops'),
+        fetch('/api/kriteria'),
+      ]);
+      const dLaptops = await resLaptops.json();
+      const dKrit = await resKrit.json();
+      setLaptops(Array.isArray(dLaptops) ? dLaptops : []);
+      setKriteria(Array.isArray(dKrit) ? dKrit : []);
+    } catch (err) {
+      console.error('Gagal memuat data laptops:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const defaultFormData = () => ({

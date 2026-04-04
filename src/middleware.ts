@@ -26,13 +26,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (pathname === "/signin") {
-    // Apabila user menuju /signin, anggap ini proses 'logout' dan bersihkan sesi
-    const response = NextResponse.next();
-    response.cookies.delete("auth_session");
-    return response;
-  }
-
   // Lanjutkan as normal jika tidak terproteksi atau sudah login
   return NextResponse.next();
 }
@@ -42,6 +35,5 @@ export const config = {
   matcher: [
     "/admin/:path*",
     "/profile/:path*",
-    "/signin",
   ],
 };
